@@ -67,10 +67,7 @@ export default function Home() {
           </span>
         </button>
       </form>
-      {
-        (isFetching || isLoading) &&
-        <Loading />
-      }
+      
       {isSuccess && (
         <div className="overflow-x-auto mt-4">
           <table className=" w-full text-sm text-left text-gray-500 dark:text-gray-400 min-w-full divide-y divide-gray-200">
@@ -187,6 +184,12 @@ export default function Home() {
           </table>
         </div>
       )}
+      {
+        (isFetching || isLoading) &&
+        <div className="flex justify-center fixed w-full h-screen items-center top-0 left-0">
+            <Loading/>
+          </div>
+      }
     </div>
   );
 }

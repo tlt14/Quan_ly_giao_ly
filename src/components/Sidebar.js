@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { setAuthenticated } from "../services/auth.slice";
+import Loading from "./Loading";
 export default function Sidebar({children}) {
   const {isAuthenticated} = useSelector(state => state.authSlice);
   const location = useLocation();
@@ -51,7 +52,7 @@ export default function Sidebar({children}) {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [logout] = useLogoutMutation();
+  const [logout,{isLoading}] = useLogoutMutation();
   const handleLogout = async() => {
     await logout().then(()=>{
       Cookies.remove("user")
@@ -212,6 +213,12 @@ export default function Sidebar({children}) {
           </div>
         </div>
       </div>
+        {
+          isLoading &&
+          <div className="flex justify-center fixed w-full h-screen items-center top-0 ">
+            <Loading/>
+          </div>
+        }
     </Fragment>
   );
 }
